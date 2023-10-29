@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookstore</title>
+    <style>
+        /* Some basic CSS for styling */
+        .book {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            display: inline-block;
+        }
+        #cart {
+            border: 1px solid #333;
+            padding: 10px;
+            width: 300px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Bookstore</h1>
+    <div class="book">
+        <h2>Book 1</h2>
+        <p>Price: $10</p>
+        <button onclick="addToCart('Book 1', 10)">Add to Cart</button>
+    </div>
+    <div class="book">
+        <h2>Book 2</h2>
+        <p>Price: $15</p>
+        <button onclick="addToCart('Book 2', 15)">Add to Cart</button>
+    </div>
+
+    <div id="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items">
+            <!-- Cart items will be displayed here -->
+        </ul>
+        <p>Total: $<span id="cart-total">0</span></p>
+    </div>
+
+    <script>
+        // JavaScript for adding items to the cart
+        let cart = []; // Stores cart items
+        let total = 0; // Stores the total cost
+
+        function addToCart(itemName, itemPrice) {
+            cart.push({ name: itemName, price: itemPrice });
+            total += itemPrice;
+
+            // Update the cart display
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+
+            cartItems.innerHTML = ''; // Clear the cart items list
+
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - $${item.price}`;
+                cartItems.appendChild(li);
+            });
+
+            cartTotal.textContent = total;
+        }
+    </script>
+</body>
+</html>
